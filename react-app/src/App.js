@@ -1,5 +1,5 @@
 import {useState, useEffect } from 'react';
-import Navbar from './Navbar';
+import Navbar from './component/Navbar';
 import FetchData from './FetchData';
 
 function App(){

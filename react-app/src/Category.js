@@ -1,5 +1,5 @@
 import React from "react";
-import FetchData,{paramsGenres} from "./FetchData";
+import FetchData,{allGenres} from "./FetchData";
 
 const dropdown = document.querySelectorAll('.dropdown');
 
@@ -33,8 +33,6 @@ dropdown.forEach(dropdown => {
     });
 });
 
-
-
 function Category(){
     return (
         <>
@@ -44,12 +42,14 @@ function Category(){
                 <div class="caret"></div>
             </div>
             <ul class="menu">
-                <FetchData fetchURL={paramsGenres.fetchAdventure} title="Action">Action</FetchData>
-                <li class="active">Adventure</li>
+                <FetchData fetchURL={allGenres.fetchAction} title="Action" id='1'>Action</FetchData>
+                <li class="active" onClick={()=>{
+                    <FetchData fetchURL={allGenres.fetchAdventure} title="Adventure" id='2'></FetchData>
+                }} >Adventure</li>
                 <li>Comedy</li>
-                <li>Slice of Life</li>
+                <li>Sports</li> 
                 <li>Fantasy</li>
-                <li>Horror</li>
+                <li>Horror</li> 
                 <li>Romance</li>
                 <li>Drama</li>
             </ul>

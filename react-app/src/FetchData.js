@@ -1,51 +1,38 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 
-export const paramsGenres = {
+
+const API_BASE = 'https://api.jikan.moe/v4/genres/anime';
+const apiUrl = 'https://api.jikan.moe/v4/anime';
+const MyAnimeList_API = 'https://api.myanimelist.net/v2/anime';
+
+export const allGenres = {
   fetchAction: 'Action',
   fetchAdventure: 'Adventure',
   fetchComedy: 'Comedy',
-  fetchSliceOfLife: 'Slice of Life',
+  fetchSport: 'Sports',
   fetchFantasy: 'Fantasy',
   fetchHorror: 'Horror',
   fetchRomance: 'Romance',
   fetchDrama: 'Drama',
 }
 
- function FetchGenres({fetchURL, title}){
+ function FetchGenres({fetchURL, title, id}){
     const [genres, setGenres] = useState([]);
     
-    useEffect(() => {
-      const options = {
-        method: 'GET',
-        url: 'https://anime-db.p.rapidapi.com/anime',
-        params: {
-                page: '1',
-                size: '30',
-                search: '',
-                genres: `${fetchURL}`,
-                sortBy: 'ranking',
-                sortOrder: 'asc'
-              },
-        headers: {
-          'X-RapidAPI-Key': 'fdf7bbf576msh7765785d0be9847p1d1177jsn41e14426508a',
-          'X-RapidAPI-Host': 'anime-db.p.rapidapi.com'
-        }
-      };
-    
+    useEffect(() => {    
       async function getGenres() {
-        const response = await axios.request(options);
+        const response = await axios.get(`${apiUrl}`);
         setGenres(response);
-        return response;
-
+ 
+        
       }
       getGenres();
       }, []);
-
       console.log(genres);
 
     return (  
-        <li></li>
+      <li>{title}</li>
     
     )
 }
