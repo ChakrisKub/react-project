@@ -74,6 +74,7 @@
     padding-right: 1%;
     padding-left: 10px;
     margin-left: auto;
+    justify-content: space-between;
   }
   
   .header--searchbar input {
@@ -275,6 +276,7 @@
   .container--animeRow--anime i:last-child {
     right: -15px;
   }
+
   /*animerow resposive*/
   @media screen and (max-width: 1000px) {
     .container--animeRow--anime--list {
