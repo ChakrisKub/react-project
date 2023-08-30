@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import TestSearch from "./TestSearch";
 
 export default function Navbar() {
-  const { handleChange, handleSubmit, search } = useGlobalContext();
+  const { handleChange, handleSubmit, search, searchResults } =
+    useGlobalContext();
 
   return (
     <header>
