@@ -2,14 +2,14 @@ import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
- 
+
 function AnimeRow({ title, animes, className }) {
   const animeRowRef = useRef(null);
   const [displayedAnimes, setDisplayedAnimes] = useState([]);
 
   useEffect(() => {
     if (animes) {
-      setDisplayedAnimes(animes.slice(0, 10)); 
+      setDisplayedAnimes(animes.slice(0, 10));
     }
   }, [animes]);
 

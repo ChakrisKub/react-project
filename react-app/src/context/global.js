@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useReducer } from "react";
 import { useState, useEffect } from "react";
+import axios from "axios";
 import reducer from "./reducer";
 
 const GlobalContext = createContext();
@@ -64,55 +65,48 @@ const GlobalContextProvider = ({ children }) => {
   //fetch popular anime
   const getPopularAnime = async () => {
     dispatch({ type: LOADING });
-    const response = await fetch(`${baseUrl}/top/anime  `);
-    const data = await response.json();
-    dispatch({ type: GET_POPULAR_ANIME, payload: data.data });
+    const response = await axios.get(`${baseUrl}/top/anime  `); // <-- change Fetch to axios
+    console.log(response);
+    dispatch({ type: GET_POPULAR_ANIME, payload: response.data.data }); //<-- add more .data
   };
 
   //fetch upcoming anime
   const getUpcomingAnime = async () => {
     dispatch({ type: LOADING });
-    const response = await fetch(`${baseUrl}/top/anime?filter=upcoming`);
-    const data = await response.json();
-    dispatch({ type: GET_UPCOMING_ANIME, payload: data.data });
+    const response = await axios.get(`${baseUrl}/top/anime?filter=upcoming`);
+    dispatch({ type: GET_UPCOMING_ANIME, payload: response.data.data });
   };
 
   //fetch airing anime
   const getAiringAnime = async () => {
     dispatch({ type: LOADING });
-    const response = await fetch(`${baseUrl}/top/anime?filter=airing`);
-    const data = await response.json();
-    dispatch({ type: GET_AIRING_ANIME, payload: data.data });
+    const response = await axios.get(`${baseUrl}/top/anime?filter=airing`);
+    dispatch({ type: GET_AIRING_ANIME, payload: response.data.data });
   };
 
   //search anime
   const searchAnime = async (anime) => {
     dispatch({ type: LOADING });
-    const response = await fetch(
+    const response = await axios.get(
       `${baseUrl}/anime?q=${anime}&order_by=popularity&sort=asc&sfw`
     );
-    const data = await response.json();
-    dispatch({ type: SEARCH, payload: data.data });
+    dispatch({ type: SEARCH, payload: response.data.data });
   };
 
   //get anime pictures
   const getAnimePictures = async (id) => {
     dispatch({ type: LOADING });
-    const response = await fetch(
-      `${baseUrl}/characters/${id}/pictures`
-    );
-    const data = await response.json();
-    dispatch({ type: GET_PICTURES, payload: data.data });
+    const response = await axios.get(`${baseUrl}/characters/${id}/pictures`);
+    dispatch({ type: GET_PICTURES, payload: response.data.data });
   };
 
   //fetch anime by genre https://api.jikan.moe/v4/genres/anime
   const getAnimeGenres = async () => {
     try {
       console.log("Fetching anime genres...");
-      const response = await fetch(`${baseUrl}/genres/anime`);
-      const data = await response.json();
-      dispatch({ type: GET_ANIME_GENRES, payload: data.data });
-      console.log("Anime genres fetched:", data.data);
+      const response = await axios.get(`${baseUrl}/genres/anime`);
+      dispatch({ type: GET_ANIME_GENRES, payload: response.data.data });
+      console.log("Anime genres fetched:", response.data.data);
     } catch (error) {
       console.error("Error fetching anime genres:", error);
     }
@@ -121,9 +115,8 @@ const GlobalContextProvider = ({ children }) => {
   // Fetch anime details by ID
   const getAnimeDetails = async (id) => {
     dispatch({ type: LOADING });
-    const response = await fetch(`${baseUrl}/anime/${id}`);
-    const data = await response.json();
-    dispatch({ type: GET_ANIME_DETAILS, payload: data });
+    const response = await axios.get(`${baseUrl}/anime/${id}`);
+    dispatch({ type: GET_ANIME_DETAILS, payload: response });
   };
 
   // Action to set the selected genre
@@ -144,33 +137,29 @@ const GlobalContextProvider = ({ children }) => {
   // fetchWinterAnime: '/seasons/2022/winter'
   const getWinterAnime = async () => {
     dispatch({ type: LOADING });
-    const response = await fetch(`${baseUrl}/seasons/2022/winter`);
-    const data = await response.json();
-    dispatch({ type: GET_WINTER_ANIME, payload: data.data });
+    const response = await axios.get(`${baseUrl}/seasons/2022/winter`);
+    dispatch({ type: GET_WINTER_ANIME, payload: response.data.data });
   };
 
   // fetchAutumnAnime: '/seasons/2022/spring'
   const getSpringAnime = async () => {
     dispatch({ type: LOADING });
-    const response = await fetch(`${baseUrl}/seasons/2022/spring`);
-    const data = await response.json();
-    dispatch({ type: GET_SPRING_ANIME, payload: data.data });
+    const response = await axios.get(`${baseUrl}/seasons/2022/spring`);
+    dispatch({ type: GET_SPRING_ANIME, payload: response.data.data });
   };
 
   //fetchFallAnime:'/seasons/2022/Fall'
   const getFallAnime = async () => {
     dispatch({ type: LOADING });
-    const response = await fetch(`${baseUrl}/seasons/2022/fall`);
-    const data = await response.json();
-    dispatch({ type: GET_FALL_ANIME, payload: data.data });
+    const response = await axios.get(`${baseUrl}/seasons/2022/fall`);
+    dispatch({ type: GET_FALL_ANIME, payload: response.data.data });
   };
 
   // fetchSummerAnime:'/seasons/2022/summer'
   const getSummerAnime = async () => {
     dispatch({ type: LOADING });
-    const response = await fetch(`${baseUrl}/seasons/2022/summer`);
-    const data = await response.json();
-    dispatch({ type: GET_SUMMER_ANIME, payload: data.data });
+    const response = await axios.get(`${baseUrl}/seasons/2022/summer`);
+    dispatch({ type: GET_SUMMER_ANIME, payload: response.data.data });
   };
 
   // useEffect(() => {
@@ -184,7 +173,7 @@ const GlobalContextProvider = ({ children }) => {
   // }, []);
 
   useEffect(() => {
-    const delay = 1800; 
+    const delay = 1800;
 
     const fetchWithDelay = async (fetchFunction) => {
       await new Promise((resolve) => setTimeout(resolve, delay));

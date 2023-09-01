@@ -1,12 +1,10 @@
-import { useState, useEffect } from "react";
 import Category from "../Category";
 import { useGlobalContext } from "../context/global";
 import { Link } from "react-router-dom";
 import TestSearch from "./TestSearch";
 
 export default function Navbar() {
-  const { handleChange, handleSubmit, search, searchResults } =
-    useGlobalContext();
+  const { handleChange, handleSubmit, search } = useGlobalContext();
 
   return (
     <header>
