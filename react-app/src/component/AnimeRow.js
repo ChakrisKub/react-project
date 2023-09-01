@@ -7,6 +7,7 @@ function AnimeRow({ title, animes, className }) {
   const animeRowRef = useRef(null);
   const [displayedAnimes, setDisplayedAnimes] = useState([]);
 
+  console.log(animes);
   useEffect(() => {
     if (animes) {
       setDisplayedAnimes(animes.slice(0, 10));
